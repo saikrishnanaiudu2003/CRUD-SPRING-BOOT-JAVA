@@ -52,31 +52,27 @@ public class PlayerService implements PlayerRepository {
         return existingPlayer;
     }
 
-    @Override
-
-    public Player updatePlayer(int playerId, Player players) {
+       @Override
+    public Player updatePlayerById(int playerId, Player player) {
         Player existingPlayer = team.get(playerId);
         if (existingPlayer == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        if (existingPlayer != null) {
-            existingPlayer.setPlayerName(players.getPlayerName());
+        if (player.getPlayerName() != null) {
+            existingPlayer.setPlayerName(player.getPlayerName());
         }
-        if (existingPlayer != null) {
-            existingPlayer.setJerseyNumber(players.getJerseyNumber());
+        if (player.getJerseyNumber() != 0) {
+            existingPlayer.setJerseyNumber(player.getJerseyNumber());
         }
-
-        if (existingPlayer != null) {
-            existingPlayer.setRole(players.getRole());
+        if (player.getRole() != null) {
+            existingPlayer.setRole(player.getRole());
         }
-
         return existingPlayer;
     }
 
     @Override
-    public void deletePlayer(int playerId) {
+    public void deletePlayerById(int playerId) {
         Player existingPlayer = team.get(playerId);
-
         if (existingPlayer == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
@@ -84,5 +80,4 @@ public class PlayerService implements PlayerRepository {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
     }
-
 }
